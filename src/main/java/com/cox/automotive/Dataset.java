@@ -11,7 +11,9 @@ import io.swagger.client.model.DealerAnswer;
 import java.util.List;
 
 /**
- * com.cox.automotive.Dataset retrieval and answering
+ * Dataset retrieval and answering
+ *
+ * @author jeff.snyder
  */
 public class Dataset {
 
@@ -21,10 +23,10 @@ public class Dataset {
   @NotNull
   public String getDatasetId() {
 
-    final DataSetApi dataApi = new DataSetApi();
+    final DataSetApi dataSetApi = getDataSetApi();
     try {
       // Get the dataset id
-      DatasetIdResponse response = dataApi.dataSetGetDataSetId();
+      DatasetIdResponse response = dataSetApi.dataSetGetDataSetId();
       if (response == null) {
         throw new ApiException("Invalid response received from API to get the dataset id.");
       }
@@ -38,18 +40,28 @@ public class Dataset {
     }
   }
 
-  public void submitAnswer(String datasetId, List<DealerAnswer> dealers) {
+  /**
+   * Submit the answer for the final check
+   *
+   * @param datasetId dataset being processed
+   * @param dealers answer containing the dealers and their associated vehicles
+   */
+  public void submitAnswer(final String datasetId, final List<DealerAnswer> dealers) {
     // Compile answer and return it
     Answer answer = new Answer();
     answer.setDealers(dealers);
 
-    final DataSetApi dataApi = new DataSetApi();
+    final DataSetApi dataSetApi = getDataSetApi();
     try {
-      AnswerResponse answerResponse = dataApi.dataSetPostAnswer(datasetId, answer);
+      AnswerResponse answerResponse = dataSetApi.dataSetPostAnswer(datasetId, answer);
       System.out.println(answerResponse.getMessage());
       System.out.println(answerResponse.getTotalMilliseconds());
     } catch (ApiException e) {
       throw new RuntimeException("Unable to set the answer for the dataset: " + datasetId);
     }
+  }
+
+  protected DataSetApi getDataSetApi() {
+    return new DataSetApi();
   }
 }

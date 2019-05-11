@@ -4,6 +4,11 @@ import io.swagger.client.model.DealerAnswer;
 
 import java.util.List;
 
+/**
+ * Runs the challenge to get the dealers and their vehicles from a given dataset.
+ *
+ * @author jeff.snyder
+ */
 public class Challenge {
 
   public static void main(String args[]) {
@@ -18,7 +23,7 @@ public class Challenge {
   /**
    * Process a dataset and submit the response
    */
-  public void processDataset() {
+  private void processDataset() {
 
     final Dataset dataset = new Dataset();
     final Vehicles vehicles = new Vehicles();

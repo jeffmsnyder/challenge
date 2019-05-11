@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 
 /**
  * This is used for vehicle processing.
+ *
+ * @author jeff.snyder
  */
 public class Vehicles {
 
@@ -22,9 +24,9 @@ public class Vehicles {
    * @return a list of integers which are the vehicle ids (no duplicates, no null values)
    */
   @NotNull
-  public List<Integer> getVehicleIds(String datasetId) {
+  public List<Integer> getVehicleIds(final String datasetId) {
     // Need to create a new API each time as they are not thread safe
-    final VehiclesApi vehiclesApi = new VehiclesApi();
+    final VehiclesApi vehiclesApi = getVehiclesApi();
     try {
       // Get vehicles for dataset
       VehicleIdsResponse response = vehiclesApi.vehiclesGetIds(datasetId);
@@ -54,9 +56,9 @@ public class Vehicles {
    * @return a list of dealers containing the vehicles associated with them
    */
   @NotNull
-  public List<DealerAnswer> getDealersWithTheirVehicles(String datasetId, List<Integer> vehicleIds) {
+  public List<DealerAnswer> getDealersWithTheirVehicles(final String datasetId, final List<Integer> vehicleIds) {
 
-    Dealers dealers = new Dealers();
+    final Dealers dealers = getDealers();
 
     vehicleIds.parallelStream()
       .forEach(vehicleId -> {
@@ -77,16 +79,16 @@ public class Vehicles {
   }
 
   /**
-   * Retreive the vehicle information
+   * Retrieve the vehicle information
    *
    * @param datasetId current dataset being processed
    * @param vehicleId the list of vehicle ids whose information is to be retrieved
    * @return the vehicle response which contains the vehicle information
    */
   @NotNull
-  private VehicleResponse getVehicleInfo(String datasetId, Integer vehicleId) {
+  private VehicleResponse getVehicleInfo(final String datasetId, final Integer vehicleId) {
     // Need to create a new API each time as they are not thread safe
-    final VehiclesApi vehiclesApi = new VehiclesApi();
+    final VehiclesApi vehiclesApi = getVehiclesApi();
     try {
       // For each vehicle, get its information
       VehicleResponse vehicleResponse = vehiclesApi.vehiclesGetVehicle(datasetId, vehicleId);
@@ -94,9 +96,21 @@ public class Vehicles {
         throw new ApiException("Invalid response received from API to get the vehicle.");
       }
 
+      if (! vehicleId.equals(vehicleResponse.getVehicleId())) {
+        throw new ApiException("Wrong vehicle in response. (expected, received): (" + vehicleId + "," + vehicleResponse.getVehicleId() + ")");
+      }
+
       return vehicleResponse;
     } catch (ApiException e) {
       throw new RuntimeException("Unable to retrieve vehicle information for (dataset, id): (" + datasetId + "," + vehicleId + ")", e);
     }
+  }
+
+  protected VehiclesApi getVehiclesApi() {
+     return new VehiclesApi();
+  }
+
+  protected Dealers getDealers() {
+    return new Dealers();
   }
 }

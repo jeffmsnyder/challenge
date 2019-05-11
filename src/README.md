@@ -86,7 +86,8 @@ challenge
 Output from the application is:
 
 <pre>
-Success
+Congratulations.
+5234
 </pre>
 
 ### *nix
@@ -106,6 +107,8 @@ Then, the following is an example of its usage:
 Output from the application is:
 
 <pre>
+Congratulations.
+5234
 </pre>
 
 ## Usage
