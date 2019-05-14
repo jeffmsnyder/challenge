@@ -21,7 +21,11 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
-class DatasetTest {
+/**
+ * This is to test dataset processing.
+ *
+ * @author jeff.snyder
+ */class DatasetTest {
 
   @Spy
   private Dataset dataset = new Dataset();
@@ -30,7 +34,7 @@ class DatasetTest {
   private DataSetApi dataSetApi;
 
   @BeforeEach
-  public void init() {
+  void init() {
     MockitoAnnotations.initMocks(this);
   }
 

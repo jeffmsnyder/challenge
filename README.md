@@ -20,7 +20,7 @@ Requires Java 8 SDK
 Requires Maven
 1. If not installed, follows the instruction here: https://maven.apache.org/install.html
 
-May requires Git depending on how the project is retrieved
+May require Git depending on how the project is retrieved
 1. If not installed, follows the instruction here: https://git-scm.com/downloads
 
 ### Running locally using IntelliJ IDEA
