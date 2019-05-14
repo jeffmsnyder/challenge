@@ -1,9 +1,11 @@
 package com.cox.automotive;
 
-import com.sun.istack.internal.NotNull;
 import io.swagger.client.ApiException;
 import io.swagger.client.api.VehiclesApi;
-import io.swagger.client.model.*;
+import io.swagger.client.model.DealerAnswer;
+import io.swagger.client.model.VehicleAnswer;
+import io.swagger.client.model.VehicleIdsResponse;
+import io.swagger.client.model.VehicleResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +23,9 @@ public class Vehicles {
    * Get the list of vehicle ids associated with the dataset
    *
    * @param datasetId current dataset being processed
+   *
    * @return a list of integers which are the vehicle ids (no duplicates, no null values)
    */
-  @NotNull
   public List<Integer> getVehicleIds(final String datasetId) {
     // Need to create a new API each time as they are not thread safe
     final VehiclesApi vehiclesApi = getVehiclesApi();
@@ -55,7 +57,6 @@ public class Vehicles {
    * @param vehicleIds list of vehicle ids to be processed
    * @return a list of dealers containing the vehicles associated with them
    */
-  @NotNull
   public List<DealerAnswer> getDealersWithTheirVehicles(final String datasetId, final List<Integer> vehicleIds) {
 
     final Dealers dealers = getDealers();
@@ -85,7 +86,6 @@ public class Vehicles {
    * @param vehicleId the list of vehicle ids whose information is to be retrieved
    * @return the vehicle response which contains the vehicle information
    */
-  @NotNull
   private VehicleResponse getVehicleInfo(final String datasetId, final Integer vehicleId) {
     // Need to create a new API each time as they are not thread safe
     final VehiclesApi vehiclesApi = getVehiclesApi();

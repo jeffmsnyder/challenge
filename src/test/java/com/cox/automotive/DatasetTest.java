@@ -25,7 +25,8 @@ import static org.mockito.Mockito.when;
  * This is to test dataset processing.
  *
  * @author jeff.snyder
- */class DatasetTest {
+ */
+class DatasetTest {
 
   @Spy
   private Dataset dataset = new Dataset();

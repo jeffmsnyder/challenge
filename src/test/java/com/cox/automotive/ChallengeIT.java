@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  *
  * @author jeff.snyder
  */
-class ChallengeIntegrationTest {
+class ChallengeIT {
 
   private static Long MAX_MILLISECONDS_EXPECTED = 8000L;
 

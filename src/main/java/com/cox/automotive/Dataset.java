@@ -1,6 +1,5 @@
 package com.cox.automotive;
 
-import com.sun.istack.internal.NotNull;
 import io.swagger.client.ApiException;
 import io.swagger.client.api.DataSetApi;
 import io.swagger.client.model.Answer;
@@ -20,7 +19,6 @@ public class Dataset {
   /**
    * @return get the dataset id for the current run
    */
-  @NotNull
   public String getDatasetId() {
 
     final DataSetApi dataSetApi = getDataSetApi();

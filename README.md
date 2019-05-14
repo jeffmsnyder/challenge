@@ -17,8 +17,11 @@ Requires Java 8 SDK
 3. Select the appropriate product to download
 4. Install as appropriate for your machine OS
 
-Requires Maven
+Requires Maven 3.6 or above
 1. If not installed, follows the instruction here: https://maven.apache.org/install.html
+
+Requires the swagger-java-client that was provided
+1. Generate it from http://api.coxauto-interview.com/Client
 
 May require Git depending on how the project is retrieved
 1. If not installed, follows the instruction here: https://git-scm.com/downloads
@@ -59,10 +62,10 @@ mvn clean package
 
 ## Running the tests
 
-To run the tests, use the following command:
+To run the unit tests, use the following command:
 
 <pre>
-mvn clean test
+mvn surefire:test
 </pre>
 
 1. DatasetTest: tests for dataset
@@ -70,6 +73,12 @@ mvn clean test
 3. DealersTest: tests for associating vehicles with dealers
 
 ### End to end tests
+
+To run the end-to-end test, use the following command:
+
+<pre>
+mvn failsafe:integration-test
+</pre>
 
 1. ChallengeTest: tests the complete application
 
